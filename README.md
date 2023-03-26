@@ -1,1 +1,1 @@
-# Introduction into Django #
+# Introduction to Django #
