@@ -1,0 +1,14 @@
+body {
+    background: rgb(4, 9, 32);
+    color: white;
+}
+
+div {
+    padding: 25px; 
+    margin: auto 30px;
+}
+h1{
+    font-family: sans-serif;
+    font-size: 90px;
+    text-align: center;
+}
