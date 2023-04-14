@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Single page</title>
+    <style>
+        button {
+            padding: 13px 5px;
+            margin-left: 12px;
+            margin-top: 15px;
+            box-shadow: 1px 2px 5px rgb(17, 17, 16);
+            border-color: bisque;
+            background: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        #content {
+            margin: 15px;
+        }
+    </style>
+    <script>
+
+        // Shows given section
+        function showsection(section) {
+            
+            // Find section text from server
+            fetch(`singlepage/sections/${section}`)
+                .then(response => response.text())
+                .then(text => {
+                    // Log text and display on page
+                    console.log(text);
+                    document.querySelector('#content').innerHTML = text;
+                })
+        }
+
+        // Wait for the page to load
+        document.addEventListener('DOMContentLoaded', () => {
+
+            // Add button functionality
+            document.querySelectorAll('button').forEach(button => {
+                button.onclick = function () {
+                    showsection(this.dataset.section);
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <h1>Hello!</h1>
+    <button data-section="1">Section 1</button>
+    <button data-section="2">Section 2</button>
+    <button data-section="3">Section 3</button>
+    <div id="content"></div>
+</body>
+
+</html>
