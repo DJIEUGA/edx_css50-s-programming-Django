@@ -17,15 +17,22 @@
             border-radius: 5px;
             cursor: pointer;
         }
+
         #content {
             margin: 15px;
         }
     </style>
     <script>
 
+        // When back arrow is clicked, show previous section
+        window.onpopstate = function (event) {
+            console.log(event.state.section);
+            showsection(event.state.section);
+        }
+
         // Shows given section
         function showsection(section) {
-            
+
             // Find section text from server
             fetch(`singlepage/sections/${section}`)
                 .then(response => response.text())
@@ -42,7 +49,11 @@
             // Add button functionality
             document.querySelectorAll('button').forEach(button => {
                 button.onclick = function () {
-                    showsection(this.dataset.section);
+                    const section = this.dataset.section
+
+                    // Add the current state to the history
+                    history.pushState({section: section}, "", `section${section}`);
+                    showsection(section);
                 }
             })
         })
